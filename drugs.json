@@ -1,0 +1,244 @@
+{
+  "drugs": {
+    "paracetamol": {
+      "brand_names": ["Dolo 650", "Crocin", "Calpol", "Pacimol", "Dolo"],
+      "generic_name": "Paracetamol (Acetaminophen)",
+      "common_strengths": ["500mg", "650mg"],
+      "label_usually_says": "Commonly taken for fever and mild to moderate pain relief. Typical adult guidance is up to 650mg every 4 to 6 hours as needed, not exceeding 4000mg (4 grams) in 24 hours.",
+      "timing": "After meals or with plenty of water",
+      "common_warnings": "Do not exceed maximum daily dose to prevent liver injury. Avoid taking multiple medicines containing paracetamol simultaneously.",
+      "emoji": "💊",
+      "purpose": "Relieves fever and body aches"
+    },
+    "dolo": {
+      "brand_names": ["Dolo 650", "Dolo"],
+      "generic_name": "Paracetamol 650mg",
+      "common_strengths": ["650mg"],
+      "label_usually_says": "Widely prescribed for high fever and body ache. Commonly taken 1 tablet 2-3 times daily after food as advised by a physician.",
+      "timing": "After meals",
+      "common_warnings": "Do not take more than 4 tablets in 24 hours. Avoid alcohol while taking.",
+      "emoji": "🌡️",
+      "purpose": "Controls fever and severe body pain"
+    },
+    "azithromycin": {
+      "brand_names": ["Azithral", "Azee", "Zady", "Azimax"],
+      "generic_name": "Azithromycin",
+      "common_strengths": ["250mg", "500mg"],
+      "label_usually_says": "Broad-spectrum macrolide antibiotic. Commonly prescribed as a once-daily dose for 3 to 5 consecutive days. Complete the full course even if symptoms improve.",
+      "timing": "Preferably 1 hour before or 2 hours after food, at the same fixed time daily",
+      "common_warnings": "Do not stop midway. May cause mild nausea or loose stools. Antacids containing aluminum or magnesium may reduce absorption.",
+      "emoji": "🦠",
+      "purpose": "Antibiotic for respiratory and throat infections"
+    },
+    "amoxicillin": {
+      "brand_names": ["Augmentin", "Moxikind-CV", "Amoxil", "Novamox"],
+      "generic_name": "Amoxicillin with Clavulanic Acid",
+      "common_strengths": ["625mg", "375mg", "500mg"],
+      "label_usually_says": "Penicillin-class antibiotic. Prescribed for bacterial infections of throat, chest, ear, and urinary tract. Often taken 2 to 3 times a day.",
+      "timing": "At the start of a meal to reduce stomach discomfort",
+      "common_warnings": "Contraindicated if you have a known penicillin allergy. Finish the full prescribed duration.",
+      "emoji": "🛡️",
+      "purpose": "Antibiotic fighting bacterial infections"
+    },
+    "pantoprazole": {
+      "brand_names": ["Pan 40", "Pantocid", "Pan-D", "Pantodac"],
+      "generic_name": "Pantoprazole",
+      "common_strengths": ["40mg", "with Domperidone 30mg (Pan-D)"],
+      "label_usually_says": "Proton pump inhibitor (PPI) that suppresses stomach acid production. Used for GERD, acid reflux, heartburn, and stomach protection alongside antibiotics or painkillers.",
+      "timing": "First thing in the morning on an empty stomach (30-60 minutes before breakfast)",
+      "common_warnings": "Swallow whole with water; do not crush or chew. Long-term use without physician guidance is not advised.",
+      "emoji": "🔥",
+      "purpose": "Reduces stomach acidity and prevents gastritis"
+    },
+    "cetirizine": {
+      "brand_names": ["Cetzine", "Okacet", "Alerid", "Zyrtec"],
+      "generic_name": "Cetirizine Hydrochloride",
+      "common_strengths": ["10mg", "5mg"],
+      "label_usually_says": "Antihistamine used for allergy symptoms like sneezing, runny nose, watery eyes, itching, and hives. Often taken once daily.",
+      "timing": "At bedtime, with or without food",
+      "common_warnings": "May cause drowsiness or dizziness. Avoid driving or operating machinery and avoid alcohol.",
+      "emoji": "🤧",
+      "purpose": "Relieves sneezing, runny nose, and allergies"
+    },
+    "metformin": {
+      "brand_names": ["Glycomet", "Glucophage", "Obimet"],
+      "generic_name": "Metformin Hydrochloride",
+      "common_strengths": ["500mg", "850mg", "1000mg SR"],
+      "label_usually_says": "First-line oral anti-diabetic medication for type 2 diabetes. Helps the body utilize insulin better and reduces glucose production in the liver.",
+      "timing": "With or immediately after meals (breakfast and/or dinner)",
+      "common_warnings": "Never skip meals when taking diabetes medication. Watch for signs of low blood sugar. Avoid heavy alcohol intake.",
+      "emoji": "🩸",
+      "purpose": "Regulates blood sugar levels for diabetes"
+    },
+    "amlodipine": {
+      "brand_names": ["Amlong", "Stamlo", "Amlovas"],
+      "generic_name": "Amlodipine Besylate",
+      "common_strengths": ["2.5mg", "5mg", "10mg"],
+      "label_usually_says": "Calcium channel blocker for high blood pressure (hypertension) and chest pain (angina). Relaxes blood vessels to improve blood flow.",
+      "timing": "Once daily at the same time every day, morning or night",
+      "common_warnings": "Do not stop abruptly without doctor approval. May cause mild ankle swelling or headache.",
+      "emoji": "❤️",
+      "purpose": "Lowers blood pressure and protects heart"
+    },
+    "ibuprofen": {
+      "brand_names": ["Brufen", "Combiflam", "Ibugesic"],
+      "generic_name": "Ibuprofen (often combined with Paracetamol in Combiflam)",
+      "common_strengths": ["200mg", "400mg"],
+      "label_usually_says": "NSAID non-steroidal anti-inflammatory pain reliever. Reduces inflammation, swelling, toothache, joint pain, and fever.",
+      "timing": "Always after meals or with milk to protect stomach lining",
+      "common_warnings": "Can irritate stomach lining. Not recommended for patients with stomach ulcers, kidney disease, or in late pregnancy.",
+      "emoji": "🩹",
+      "purpose": "Relieves inflammatory body pain, toothache, and swelling"
+    },
+    "ors": {
+      "brand_names": ["Electral", "Walyte", "Prolyte"],
+      "generic_name": "Oral Rehydration Salts (WHO Formula)",
+      "common_strengths": ["Sachet for 1 Liter"],
+      "label_usually_says": "Replaces essential fluids and electrolytes lost during diarrhea, vomiting, or heavy sweating from heat exhaustion.",
+      "timing": "Sip frequently throughout the day after each loose motion or episode of sweating",
+      "common_warnings": "Dissolve the entire sachet in exactly the recommended quantity of clean drinking water (usually 1 liter). Do not boil prepared solution; discard after 24 hours.",
+      "emoji": "💧",
+      "purpose": "Restores hydration and essential body salts"
+    },
+    "montelukast": {
+      "brand_names": ["Montek-LC", "Montair-LC", "Telekast-L"],
+      "generic_name": "Montelukast Sodium + Levocetirizine",
+      "common_strengths": ["10mg + 5mg"],
+      "label_usually_says": "Combination leukotriene receptor antagonist and antihistamine for allergic rhinitis, asthma symptoms, and chronic cough.",
+      "timing": "Once daily at night before sleeping",
+      "common_warnings": "May induce mild drowsiness. Inform doctor if unusual mood changes or agitation occur.",
+      "emoji": "🫁",
+      "purpose": "Calms allergic cough, wheezing, and congestion"
+    },
+    "telmisartan": {
+      "brand_names": ["Telma", "Telmikind", "Telsartan"],
+      "generic_name": "Telmisartan",
+      "common_strengths": ["20mg", "40mg", "80mg"],
+      "label_usually_says": "Angiotensin receptor blocker (ARB) used to manage hypertension and reduce cardiovascular risk.",
+      "timing": "Once daily at the same time, with or without food",
+      "common_warnings": "Contraindicated in pregnancy. Regular monitoring of blood pressure and kidney function recommended.",
+      "emoji": "🩺",
+      "purpose": "Controls blood pressure and guards kidney health"
+    },
+    "atorvastatin": {
+      "brand_names": ["Atorva", "Lipitor", "Storvas", "Atocor"],
+      "generic_name": "Atorvastatin Calcium",
+      "common_strengths": ["10mg", "20mg", "40mg"],
+      "label_usually_says": "Statin medication used to lower bad cholesterol (LDL) and triglycerides and reduce the risk of heart attacks and strokes.",
+      "timing": "Once daily at night, with or without food",
+      "common_warnings": "Report unexplained muscle pain or tenderness immediately. Avoid large amounts of grapefruit juice.",
+      "emoji": "🫀",
+      "purpose": "Lowers cholesterol and prevents artery clogging"
+    },
+    "ofloxacin": {
+      "brand_names": ["O2", "Zenflox-OZ", "Ornof"],
+      "generic_name": "Ofloxacin + Ornidazole",
+      "common_strengths": ["200mg + 500mg"],
+      "label_usually_says": "Dual antibacterial and antiprotozoal combination commonly prescribed for gastrointestinal infections, stomach bugs, and loose motions.",
+      "timing": "Twice daily after meals for usually 3-5 days",
+      "common_warnings": "Strictly avoid alcohol during treatment and for 48 hours after to prevent severe nausea/headaches. Complete the full course.",
+      "emoji": "🦠",
+      "purpose": "Treats bacterial stomach infections and diarrhea"
+    },
+    "domperidone": {
+      "brand_names": ["Domstal", "Vomitstop", "Motinorm"],
+      "generic_name": "Domperidone",
+      "common_strengths": ["10mg"],
+      "label_usually_says": "Prokinetic and anti-emetic used to prevent nausea, vomiting, indigestion, and bloating.",
+      "timing": "15 to 30 minutes before meals",
+      "common_warnings": "Take for the shortest necessary duration. Consult doctor if heart rhythm irregularities exist.",
+      "emoji": "🤢",
+      "purpose": "Stops nausea, vomiting, and feeling full"
+    },
+    "ranitidine": {
+      "brand_names": ["Rantac", "Zinetac", "Famocid (Famotidine)"],
+      "generic_name": "H2 Receptor Blocker (Ranitidine / Famotidine)",
+      "common_strengths": ["150mg", "40mg (Famotidine)"],
+      "label_usually_says": "Reduces excess stomach acid secretion to treat indigestion, acid indigestion, and peptic ulcers.",
+      "timing": "30 minutes before meals or at bedtime",
+      "common_warnings": "Inform doctor if stomach symptoms persist beyond 2 weeks.",
+      "emoji": "🍵",
+      "purpose": "Soothes acid reflux and stomach burn"
+    },
+    "levothyroxine": {
+      "brand_names": ["Thyronorm", "Eltroxin", "Thyrox"],
+      "generic_name": "Levothyroxine Sodium",
+      "common_strengths": ["25mcg", "50mcg", "75mcg", "100mcg"],
+      "label_usually_says": "Synthetic thyroid hormone to treat hypothyroidism (underactive thyroid gland).",
+      "timing": "Strictly first thing in morning with plain water, 45-60 minutes before tea/coffee or breakfast",
+      "common_warnings": "Do not take calcium or iron supplements within 4 hours. Requires regular TSH blood tests to adjust dose.",
+      "emoji": "🦋",
+      "purpose": "Supplements vital thyroid hormone"
+    },
+    "diclofenac": {
+      "brand_names": ["Voveran", "Reactin", "Diclogesic"],
+      "generic_name": "Diclofenac Sodium / Potassium",
+      "common_strengths": ["50mg", "75mg"],
+      "label_usually_says": "Potent anti-inflammatory pain medicine for severe joint pain, arthritis, dental surgery, and muscular strains.",
+      "timing": "Always with or after meals with plenty of water",
+      "common_warnings": "Short-term use only. High risk of gastrointestinal irritation. Use with caution in hypertension and cardiac conditions.",
+      "emoji": "🦴",
+      "purpose": "Relieves acute arthritis and muscular joint pain"
+    },
+    "vitamin_d3": {
+      "brand_names": ["Calcirol", "Uprise-D3", "Tayd3", "D-Rise"],
+      "generic_name": "Cholecalciferol (Vitamin D3)",
+      "common_strengths": ["60,000 IU (Weekly sachet/capsule)"],
+      "label_usually_says": "High-dose Vitamin D3 to correct deficiency, support bone density, and enhance calcium absorption.",
+      "timing": "Once a week after the main meal containing some dietary fat or with milk",
+      "common_warnings": "This is a weekly dose, NOT daily! Do not take daily unless specifically instructed by a doctor.",
+      "emoji": "☀️",
+      "purpose": "Strengthens bones and boosts immunity"
+    },
+    "cough_syrup": {
+      "brand_names": ["Ascoril-D", "Benadryl", "Grilinctus", "Alex"],
+      "generic_name": "Cough Formulation (Dextromethorphan or Terbutaline + Bromhexine)",
+      "common_strengths": ["5ml - 10ml dosage"],
+      "label_usually_says": "Provides symptomatic relief from persistent cough, chest congestion, or dry throat tickle.",
+      "timing": "After meals, using the supplied measuring cup",
+      "common_warnings": "May cause drowsiness. Check whether formula is for dry cough or wet chesty cough.",
+      "emoji": "🍯",
+      "purpose": "Soothes coughing and loosens chest mucus"
+    }
+  },
+  "interactions": [
+    {
+      "drugs": ["ibuprofen", "paracetamol"],
+      "severity": "Moderate",
+      "warning": "Combining multiple pain/fever medicines (e.g. Brufen and Crocin/Dolo) increases risk of stomach upset and liver/kidney strain. Verify if a combined formulation like Combiflam is already prescribed."
+    },
+    {
+      "drugs": ["amoxicillin", "methotrexate"],
+      "severity": "High",
+      "warning": "Amoxicillin may decrease clearance of methotrexate, increasing toxicity."
+    },
+    {
+      "drugs": ["metformin", "alcohol"],
+      "severity": "High",
+      "warning": "Drinking alcohol while taking Metformin increases the risk of lactic acidosis and severe hypoglycemia."
+    },
+    {
+      "drugs": ["pantoprazole", "azithromycin"],
+      "severity": "Mild",
+      "warning": "Pantoprazole suppresses stomach acid which may alter the absorption rate of azithromycin. Take pantoprazole 30-60 mins before food and azithromycin 1 hour before or 2 hours after food."
+    },
+    {
+      "drugs": ["amlodipine", "telmisartan"],
+      "severity": "Mild/Synergistic",
+      "warning": "Often prescribed together for hypertension. Monitor for lightheadedness or excessive low blood pressure when standing."
+    },
+    {
+      "drugs": ["diclofenac", "ibuprofen"],
+      "severity": "High",
+      "warning": "Two NSAIDs should NOT be taken simultaneously. Doing so multiplies the danger of stomach ulcers, bleeding, and kidney impairment."
+    },
+    {
+      "drugs": ["levothyroxine", "calcium"],
+      "severity": "Moderate",
+      "warning": "Calcium, iron, and antacids bind to thyroxine and prevent its absorption. Keep a strict 4-hour gap between them."
+    }
+  ],
+  "generic_schemes": {
+    "jan_aushadhi_note": "Under the Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP), high-quality generic equivalents are available at Jan Aushadhi Kendras across India at up to 50%-90% lower prices than branded medicines."
+  }
+}

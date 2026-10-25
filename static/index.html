@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dawai Dost (दवाई दोस्त) — Multimodal Indic Prescription AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at 10% 20%, #f4fbfb 0%, #edf7f6 90%);
+      --surface: #ffffff;
+      --surface-glass: rgba(255, 255, 255, 0.85);
+      --border: #e2eceb;
+      --text-main: #132a29;
+      --text-muted: #53716f;
+      --primary: #0d9488;
+      --primary-hover: #0f766e;
+      --primary-light: #ccfbf1;
+      --accent: #f97316;
+      --accent-light: #ffedd5;
+      --danger: #ef4444;
+      --danger-light: #fee2e2;
+      --morning-color: #f59e0b;
+      --afternoon-color: #0284c7;
+      --night-color: #6366f1;
+      --card-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+      --glow-shadow: 0 0 25px rgba(13, 148, 136, 0.25);
+    }
+
+    [data-theme="dark"] {
+      --bg-gradient: radial-gradient(circle at 10% 20%, #0d1717 0%, #081010 90%);
+      --surface: #122120;
+      --surface-glass: rgba(18, 33, 32, 0.85);
+      --border: #1f3735;
+      --text-main: #f0fdfa;
+      --text-muted: #94b4b1;
+      --primary: #14b8a6;
+      --primary-hover: #2dd4bf;
+      --primary-light: #134e4a;
+      --accent: #fb923c;
+      --accent-light: #7c2d12;
+      --danger: #f87171;
+      --danger-light: #7f1d1d;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', -apple-system, sans-serif;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* Header */
+    header {
+      background: var(--surface-glass);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 0.85rem 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary), #065f46);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+    }
+
+    .brand-titles h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-badge {
+      font-size: 0.7rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-titles p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .lang-select-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px 10px;
+      font-size: 0.85rem;
+    }
+
+    select {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-demo {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+    }
+
+    .btn-demo:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
+    }
+
+    .btn-outline {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1400px;
+      margin: 1.5rem auto;
+      padding: 0 1.25rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 992px) {
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.35rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-title span.badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    /* Upload Area */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(13, 148, 136, 0.02);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .upload-zone:hover {
+      border-color: var(--primary);
+      background: rgba(13, 148, 136, 0.05);
+    }
+
+    .upload-icon {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .preview-container {
+      display: none;
+      margin-top: 0.75rem;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      max-height: 180px;
+    }
+
+    .preview-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* Editable Medicines List */
+    .med-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .med-row {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1.5fr auto;
+      gap: 0.5rem;
+      align-items: center;
+      background: var(--bg-gradient);
+      padding: 0.5rem 0.65rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .med-input {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 0.8rem;
+      color: var(--text-main);
+      width: 100%;
+    }
+
+    .med-del-btn {
+      background: transparent;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 2px 6px;
+    }
+
+    /* Voice & Text Input Section */
+    .mic-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem 0;
+      gap: 0.6rem;
+    }
+
+    .mic-button {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #0d9488);
+      border: none;
+      outline: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(13, 148, 136, 0.35);
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    .mic-button:hover {
+      transform: scale(1.06);
+    }
+
+    .mic-button.recording {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      animation: mic-pulse 1.4s infinite;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+    }
+
+    @keyframes mic-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    .mic-status {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .query-textarea {
+      width: 100%;
+      height: 80px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      resize: vertical;
+      outline: none;
+    }
+
+    .query-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-light);
+    }
+
+    .quick-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .chip {
+      background: var(--bg-gradient);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .chip:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Right Column Feed */
+    .timeline-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.35rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 1.25rem;
+    }
+
+    .timeline-slots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 650px) {
+      .timeline-slots {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .slot-box {
+      border-radius: 12px;
+      padding: 0.9rem;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .slot-morning {
+      background: rgba(245, 158, 11, 0.05);
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+
+    .slot-afternoon {
+      background: rgba(2, 132, 199, 0.05);
+      border-color: rgba(2, 132, 199, 0.25);
+    }
+
+    .slot-night {
+      background: rgba(99, 102, 241, 0.05);
+      border-color: rgba(99, 102, 241, 0.25);
+    }
+
+    .slot-header {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .slot-morning .slot-header { color: var(--morning-color); }
+    .slot-afternoon .slot-header { color: var(--afternoon-color); }
+    .slot-night .slot-header { color: var(--night-color); }
+
+    .slot-med-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 8px;
+      font-size: 0.75rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .slot-med-badge .med-head {
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-main);
+    }
+
+    .slot-med-badge .med-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Voice Output Banner */
+    .voice-player {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(20, 184, 166, 0.12));
+      border: 1px solid var(--primary-light);
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.1rem;
+    }
+
+    .voice-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .wave-bars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 24px;
+    }
+
+    .wave-bar {
+      width: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+      animation: wave 1s ease-in-out infinite;
+      height: 8px;
+    }
+
+    .wave-bar:nth-child(2) { animation-delay: 0.2s; height: 16px; }
+    .wave-bar:nth-child(3) { animation-delay: 0.4s; height: 22px; }
+    .wave-bar:nth-child(4) { animation-delay: 0.1s; height: 14px; }
+    .wave-bar:nth-child(5) { animation-delay: 0.3s; height: 18px; }
+
+    @keyframes wave {
+      0%, 100% { height: 6px; }
+      50% { height: 22px; }
+    }
+
+    .voice-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Explanation response text */
+    .reply-box {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-main);
+      white-space: pre-wrap;
+    }
+
+    /* Tool Trace Accordion */
+    .trace-container {
+      background: rgba(13, 148, 136, 0.03);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      margin-top: 1rem;
+    }
+
+    .trace-header {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .trace-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.6rem;
+    }
+
+    .trace-item {
+      font-size: 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .trace-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    /* Jan Aushadhi generic card */
+    .savings-card {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(217, 119, 6, 0.05));
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      margin-top: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .savings-icon {
+      font-size: 1.6rem;
+    }
+
+    .savings-text {
+      font-size: 0.78rem;
+      color: var(--text-main);
+    }
+
+    /* Escalation alert */
+    .escalate-card {
+      background: var(--danger-light);
+      border: 1px solid var(--danger);
+      color: #991b1b;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 1.1rem 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    .safety-disclaimer {
+      max-width: 900px;
+      margin: 0 auto;
+      font-weight: 600;
+      color: #92400e;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-wrap">
+        <div class="brand-icon">💊</div>
+        <div class="brand-titles">
+          <h1>Dawai Dost <span style="font-weight:500; font-size:1.1rem; color:var(--primary);">(दवाई दोस्त)</span> <span class="brand-badge">Sarvam AI Powered</span></h1>
+          <p>India's First Multimodal AI Prescription Companion • Speaks 11 Indic Languages</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="demoBtn" class="btn btn-demo" title="Prefill realistic prescription and Hindi voice query">
+          <span>✨</span> Try Demo Mode
+        </button>
+        <div class="lang-select-wrap">
+          <span>🗣️</span>
+          <select id="langSelect" aria-label="Select Indian Language">
+            <option value="hi-IN" selected>हिन्दी (Hindi)</option>
+            <option value="en-IN">English (Indian)</option>
+            <option value="bn-IN">বাংলা (Bengali)</option>
+            <option value="ta-IN">தமிழ் (Tamil)</option>
+            <option value="te-IN">తెలుగు (Telugu)</option>
+            <option value="mr-IN">मराठी (Marathi)</option>
+            <option value="gu-IN">ગુજરાતી (Gujarati)</option>
+            <option value="kn-IN">ಕನ್ನಡ (Kannada)</option>
+            <option value="ml-IN">മലയാളം (Malayalam)</option>
+            <option value="pa-IN">ਪੰਜਾਬੀ (Punjabi)</option>
+            <option value="od-IN">ଓଡ଼ିଆ (Odia)</option>
+          </select>
+        </div>
+        <button id="themeToggle" class="btn btn-outline" title="Toggle Dark/Light Mode">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Grid -->
+  <main>
+    <div class="grid-layout">
+      
+      <!-- Left Column: Inputs -->
+      <section class="left-col">
+        
+        <!-- 1. Prescription Photo Upload -->
+        <div class="card">
+          <div class="card-title">
+            <span>📷 1. Prescription Photo (पर्ची की फोटो)</span>
+            <span class="badge">Sarvam Vision</span>
+          </div>
+
+          <div id="dropZone" class="upload-zone">
+            <input type="file" id="fileInput" accept="image/*,application/pdf" style="display:none;">
+            <div class="upload-icon">📄</div>
+            <p style="font-weight:600; font-size:0.9rem;">Drop prescription photo here or click to browse</p>
+            <p style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Supports Doctor's Prescriptions, OPD Slips, Hospital discharge notes</p>
+          </div>
+
+          <div id="previewContainer" class="preview-container">
+            <img id="previewImg" class="preview-img" alt="Prescription preview">
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.75rem;">
+            <button id="extractBtn" class="btn btn-primary" style="width:100%; justify-content:center;">
+              <span>🔍</span> Extract Medicines with Sarvam Vision
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Detected Medicines (Editable List) -->
+        <div class="card">
+          <div class="card-title">
+            <span>💊 2. Detected Medicines (सत्यापित दवाएं)</span>
+            <span class="badge" id="medCountBadge">0 Medicines</span>
+          </div>
+          <p style="font-size:0.75rem; color:var(--text-muted);">
+            Safety Rule: Review and confirm the extracted medicines before asking. Edit or add as needed.
+          </p>
+
+          <div id="medList" class="med-list">
+            <!-- Dynamic rows will render here -->
+          </div>
+
+          <div style="display:flex; gap:0.5rem; margin-top:0.75rem;">
+            <button id="addMedRowBtn" class="btn btn-outline" style="flex:1; font-size:0.8rem;">
+              ➕ Add Medicine
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Voice & Text Question -->
+        <div class="card">
+          <div class="card-title">
+            <span>🎙️ 3. Ask Dawai Dost (बोलें या लिखें)</span>
+            <span class="badge">Sarvam Saaras STT</span>
+          </div>
+
+          <!-- Big Mic button -->
+          <div class="mic-container">
+            <button id="micBtn" class="mic-button" title="Click to Record Voice Query">
+              <span>🎤</span>
+            </button>
+            <div id="micStatus" class="mic-status">Tap microphone to speak in your language</div>
+          </div>
+
+          <!-- Text input fallback -->
+          <textarea id="queryText" class="query-textarea" placeholder="या यहाँ अपना सवाल लिखें (जैसे: मुझे ये दवाएं कब लेनी हैं? खाली पेट क्या लेना है?)..."></textarea>
+
+          <div class="quick-chips">
+            <span class="chip" data-q="मुझे ये दवाइयां कब और कैसे लेनी हैं?">🕒 कब और कैसे लें?</span>
+            <span class="chip" data-q="क्या कोई दवा खाली पेट लेनी है?">🥣 खाली पेट दवा?</span>
+            <span class="chip" data-q="क्या इन दवाओं का कोई सस्ता जेनेरिक (Jan Aushadhi) विकल्प है?">💰 जन औषधि विकल्प?</span>
+            <span class="chip" data-q="क्या इन दोनों दवाओं को साथ में लेने से कोई नुक़सान है?">⚠️ कोई साइड-इफेक्ट?</span>
+          </div>
+
+          <button id="askBtn" class="btn btn-primary" style="width:100%; margin-top:0.9rem; justify-content:center; padding:0.75rem;">
+            <span id="askBtnIcon">🚀</span> <span id="askBtnText">Analyze Prescription (परामर्श प्राप्त करें)</span>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Visual Timeline & Responses -->
+      <section class="right-col">
+
+        <!-- Escalation Banner (Hidden by default) -->
+        <div id="escalationBox" class="escalate-card" style="display:none;">
+          <div style="font-size:1.5rem;">⚠️</div>
+          <div>
+            <h4 style="font-weight:700; font-size:0.9rem;">Medical Consultation Alert</h4>
+            <p id="escalationMsg" style="font-size:0.82rem; margin-top:2px;">Special attention or physician review is required for this case.</p>
+            <p style="font-size:0.75rem; margin-top:4px; font-weight:600;">National Tele-Consultation Helpline: 1075 (Toll-Free)</p>
+          </div>
+        </div>
+
+        <!-- Voice Player (Sarvam Bulbul TTS Out) -->
+        <div id="voicePlayer" class="voice-player" style="display:none;">
+          <div class="voice-info">
+            <div class="wave-bars" id="waveBars">
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+            </div>
+            <div>
+              <div style="font-weight:700; font-size:0.85rem;" id="voiceStatusText">Voice Audio Ready (Sarvam Bulbul)</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);" id="voiceMeta">Speaker: Ritu • Indic Medical Voice</div>
+            </div>
+          </div>
+          <button id="playAudioBtn" class="voice-btn">
+            <span>🔊</span> Replay Voice (आवाज़ सुनें)
+          </button>
+        </div>
+
+        <!-- Visual Timeline Card (Visual Out) -->
+        <div class="timeline-card" id="timelineCard">
+          <div class="card-title">
+            <span>📅 Daily Medicine Schedule (दैनिक दवा अनुसूची)</span>
+            <span class="badge" id="timelineSummaryBadge">Morning / Afternoon / Night</span>
+          </div>
+
+          <div class="timeline-slots">
+            <!-- Morning Slot -->
+            <div class="slot-box slot-morning">
+              <div class="slot-header">
+                <span>🌅</span>
+                <div>
+                  <div>Morning (सुबह)</div>
+                  <div style="font-size:0.68rem; font-weight:500; opacity:0.8;">8:00 AM - 9:00 AM</div>
+                </div>
+              </div>
+              <div id="morningSlotMeds" style="display:flex; flex-direction:column; gap:0.4rem;">
+                <div style="font-size:0.72rem; color:var(--text-muted); font-style:italic;">No morning meds added</div>
+              </div>
+            </div>
+
+            <!-- Afternoon Slot -->
+            <div class="slot-box slot-afternoon">
+              <div class="slot-header">
+                <span>☀️</span>
+                <div>
+                  <div>Afternoon (दोपहर)</div>
+                  <div style="font-size:0.68rem; font-weight:500; opacity:0.8;">1:00 PM - 2:00 PM</div>
+                </div>
+              </div>
+              <div id="afternoonSlotMeds" style="display:flex; flex-direction:column; gap:0.4rem;">
+                <div style="font-size:0.72rem; color:var(--text-muted); font-style:italic;">No afternoon meds added</div>
+              </div>
+            </div>
+
+            <!-- Night Slot -->
+            <div class="slot-box slot-night">
+              <div class="slot-header">
+                <span>🌙</span>
+                <div>
+                  <div>Night (रात)</div>
+                  <div style="font-size:0.68rem; font-weight:500; opacity:0.8;">8:30 PM - 9:30 PM</div>
+                </div>
+              </div>
+              <div id="nightSlotMeds" style="display:flex; flex-direction:column; gap:0.4rem;">
+                <div style="font-size:0.72rem; color:var(--text-muted); font-style:italic;">No night meds added</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Friendly Explanation Card (Text Out) -->
+        <div class="card">
+          <div class="card-title">
+            <span>💬 Dawai Dost Explanation (सरल मार्गदर्शन)</span>
+            <span class="badge" id="replyLangBadge">Sarvam-105B Reasoning</span>
+          </div>
+          <div id="replyBox" class="reply-box">
+            नमस्ते! मैं आपका दवाई दोस्त हूँ। अपनी पर्ची की फ़ोटो अपलोड करें या नीचे माइक दबाकर पूछें कि कौन सी दवा कब और कैसे लेनी है।
+          </div>
+
+          <!-- Jan Aushadhi Savings Info -->
+          <div class="savings-card" id="savingsCard">
+            <div class="savings-icon">🏥</div>
+            <div class="savings-text">
+              <strong>Pradhan Mantri Jan Aushadhi Kendra (PMBJP):</strong><br>
+              Inquire with your pharmacist for generic equivalents of these medicines to save 50% to 90% on your pharmacy bills.
+            </div>
+          </div>
+
+          <!-- Visible Agentic Reasoning Trace -->
+          <div class="trace-container">
+            <div class="trace-header" id="traceToggle">
+              <span>🧠 Agent Reasoning Trace (<span id="traceCount">0 steps</span>)</span>
+              <span id="traceArrow">▼</span>
+            </div>
+            <div class="trace-steps" id="traceList">
+              <div style="font-size:0.72rem; color:var(--text-muted);">Waiting for query to initialize agent tool-calling loop...</div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer with Mandatory Medical Disclaimer -->
+  <footer>
+    <div class="safety-disclaimer">
+      ⚠️ Informational only. Not medical advice. Never alter or begin medical dosages without consulting a licensed physician or pharmacist.
+    </div>
+    <div style="margin-top:4px; font-size:0.72rem; color:var(--text-muted);">
+      Dawai Dost • Built for India Hackathon with Sarvam AI SDK (Saaras v3, Bulbul v3, Mayura v1, Sarvam-105B, DocAI)
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    // State management
+    const state = {
+      medicines: [],
+      selectedLang: 'hi-IN',
+      isRecording: false,
+      mediaRecorder: null,
+      audioChunks: [],
+      currentAudio: null,
+      uploadedFile: null
+    };
+
+    // DOM Elements
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImg = document.getElementById('previewImg');
+    const extractBtn = document.getElementById('extractBtn');
+    const medList = document.getElementById('medList');
+    const medCountBadge = document.getElementById('medCountBadge');
+    const addMedRowBtn = document.getElementById('addMedRowBtn');
+    const micBtn = document.getElementById('micBtn');
+    const micStatus = document.getElementById('micStatus');
+    const queryText = document.getElementById('queryText');
+    const askBtn = document.getElementById('askBtn');
+    const askBtnText = document.getElementById('askBtnText');
+    const askBtnIcon = document.getElementById('askBtnIcon');
+    const demoBtn = document.getElementById('demoBtn');
+    const langSelect = document.getElementById('langSelect');
+    const themeToggle = document.getElementById('themeToggle');
+    const voicePlayer = document.getElementById('voicePlayer');
+    const playAudioBtn = document.getElementById('playAudioBtn');
+    const replyBox = document.getElementById('replyBox');
+    const morningSlotMeds = document.getElementById('morningSlotMeds');
+    const afternoonSlotMeds = document.getElementById('afternoonSlotMeds');
+    const nightSlotMeds = document.getElementById('nightSlotMeds');
+    const traceList = document.getElementById('traceList');
+    const traceCount = document.getElementById('traceCount');
+    const escalationBox = document.getElementById('escalationBox');
+    const escalationMsg = document.getElementById('escalationMsg');
+
+    // Language change listener
+    langSelect.addEventListener('change', (e) => {
+      state.selectedLang = e.target.value;
+    });
+
+    // Theme toggle
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Quick chips click
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        queryText.value = chip.getAttribute('data-q');
+      });
+    });
+
+    // File upload handlers
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.style.borderColor = 'var(--primary)'; });
+    dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = 'var(--border)'; });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (e.dataTransfer.files.length > 0) {
+        handleFileSelection(e.dataTransfer.files[0]);
+      }
+    });
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        handleFileSelection(e.target.files[0]);
+      }
+    });
+
+    function handleFileSelection(file) {
+      state.uploadedFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        previewImg.src = e.target.result;
+        previewContainer.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Medicine Row Rendering
+    function renderMedicines() {
+      medList.innerHTML = '';
+      medCountBadge.textContent = `${state.medicines.length} Medicines`;
+
+      if (state.medicines.length === 0) {
+        medList.innerHTML = '<div style="font-size:0.75rem; color:var(--text-muted); text-align:center; padding:10px;">No medicines detected yet. Upload prescription or add manually.</div>';
+        updateTimelineUI(null);
+        return;
+      }
+
+      state.medicines.forEach((med, idx) => {
+        const row = document.createElement('div');
+        row.className = 'med-row';
+        row.innerHTML = `
+          <input type="text" class="med-input" value="${med.name || ''}" placeholder="Name (e.g. Dolo)" data-field="name" data-idx="${idx}">
+          <input type="text" class="med-input" value="${med.strength || ''}" placeholder="Strength" data-field="strength" data-idx="${idx}">
+          <input type="text" class="med-input" value="${med.frequency || ''}" placeholder="Freq (1-0-1)" data-field="frequency" data-idx="${idx}">
+          <button class="med-del-btn" data-idx="${idx}" title="Remove">&times;</button>
+        `;
+        medList.appendChild(row);
+      });
+
+      // Bind input changes
+      medList.querySelectorAll('.med-input').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const idx = parseInt(e.target.getAttribute('data-idx'));
+          const field = e.target.getAttribute('data-field');
+          state.medicines[idx][field] = e.target.value;
+          syncTimelineLocally();
+        });
+      });
+
+      // Bind delete
+      medList.querySelectorAll('.med-del-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.target.getAttribute('data-idx'));
+          state.medicines.splice(idx, 1);
+          renderMedicines();
+          syncTimelineLocally();
+        });
+      });
+
+      syncTimelineLocally();
+    }
+
+    addMedRowBtn.addEventListener('click', () => {
+      state.medicines.push({ name: '', strength: '500mg', frequency: '1-0-1', duration: '3 days' });
+      renderMedicines();
+    });
+
+    // Extract Button Call
+    extractBtn.addEventListener('click', async () => {
+      if (!state.uploadedFile) {
+        alert('Please select or drop a prescription image first, or click Demo Mode.');
+        return;
+      }
+      extractBtn.disabled = true;
+      extractBtn.innerHTML = '<div class="spinner"></div> Extracting via Sarvam Vision...';
+
+      const formData = new FormData();
+      formData.append('file', state.uploadedFile);
+
+      try {
+        const resp = await fetch('/api/extract', { method: 'POST', body: formData });
+        const data = await resp.json();
+        if (data.medicines && data.medicines.length > 0) {
+          state.medicines = data.medicines;
+          renderMedicines();
+          replyBox.textContent = `✅ Successfully extracted ${data.medicines.length} medicines using Sarvam Vision. Please review the confirmed list above and tap 'Analyze Prescription' to receive full schedule & guidance.`;
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Extraction encountered an error. Please check backend connection.');
+      } finally {
+        extractBtn.disabled = false;
+        extractBtn.innerHTML = '<span>🔍</span> Extract Medicines with Sarvam Vision';
+      }
+    });
+
+    // Microphone Recording via Web MediaRecorder API
+    micBtn.addEventListener('click', async () => {
+      if (state.isRecording) {
+        stopRecording();
+      } else {
+        startRecording();
+      }
+    });
+
+    async function startRecording() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        state.audioChunks = [];
+        state.mediaRecorder = new MediaRecorder(stream);
+
+        state.mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) state.audioChunks.push(e.data);
+        };
+
+        state.mediaRecorder.onstop = async () => {
+          const audioBlob = new Blob(state.audioChunks, { type: 'audio/wav' });
+          await uploadAndTranscribeAudio(audioBlob);
+          stream.getTracks().forEach(track => track.stop());
+        };
+
+        state.mediaRecorder.start();
+        state.isRecording = true;
+        micBtn.classList.add('recording');
+        micStatus.textContent = 'Listening... Tap again when finished speaking';
+      } catch (err) {
+        console.error(err);
+        alert('Microphone access denied or unsupported in browser. You can type in the box below!');
+      }
+    }
+
+    function stopRecording() {
+      if (state.mediaRecorder && state.isRecording) {
+        state.mediaRecorder.stop();
+        state.isRecording = false;
+        micBtn.classList.remove('recording');
+        micStatus.textContent = 'Transcribing voice via Sarvam Saaras...';
+      }
+    }
+
+    async function uploadAndTranscribeAudio(blob) {
+      const formData = new FormData();
+      formData.append('file', blob, 'user_audio.wav');
+      formData.append('language', state.selectedLang);
+
+      try {
+        const resp = await fetch('/api/transcribe', { method: 'POST', body: formData });
+        const data = await resp.json();
+        if (data.text) {
+          queryText.value = data.text;
+          micStatus.textContent = `Recognized (${data.language}): "${data.text.slice(0, 40)}..."`;
+          // Auto trigger ask
+          askDawaiDost();
+        } else {
+          micStatus.textContent = 'No voice detected. Tap to try again or type below.';
+        }
+      } catch (err) {
+        console.error(err);
+        micStatus.textContent = 'Audio transcription error. Please type your query.';
+      }
+    }
+
+    // Main Agent Query Trigger
+    askBtn.addEventListener('click', () => askDawaiDost());
+
+    async function askDawaiDost() {
+      const query = queryText.value.trim() || 'कृपया इन सभी दवाओं के बारे में समझाइए।';
+      askBtn.disabled = true;
+      askBtnIcon.innerHTML = '<div class="spinner"></div>';
+      askBtnText.textContent = 'Dawai Dost reasoning...';
+      replyBox.textContent = '🧠 Dawai Dost Agent is examining medicines, checking safety interactions, and building schedule...';
+
+      try {
+        const payload = {
+          text: query,
+          language: state.selectedLang,
+          medicines: state.medicines
+        };
+
+        const resp = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await resp.json();
+
+        // 1. Render textual explanation
+        replyBox.textContent = data.reply_text || 'मार्गदर्शन उपलब्ध नहीं है।';
+
+        // 2. Render timeline
+        if (data.timeline) {
+          updateTimelineUI(data.timeline);
+        }
+
+        // 3. Render Tool Trace
+        renderToolTrace(data.tool_trace || []);
+
+        // 4. Escalation alert
+        if (data.escalated) {
+          escalationBox.style.display = 'flex';
+        } else {
+          escalationBox.style.display = 'none';
+        }
+
+        // 5. Request TTS Voice synthesis
+        generateAndPlayTTS(data.reply_text, state.selectedLang);
+
+      } catch (err) {
+        console.error(err);
+        replyBox.textContent = 'परामर्श तैयार करने में त्रुटि हुई। कृपया पुनः प्रयास करें।';
+      } finally {
+        askBtn.disabled = false;
+        askBtnIcon.textContent = '🚀';
+        askBtnText.textContent = 'Analyze Prescription (परामर्श प्राप्त करें)';
+      }
+    }
+
+    // TTS Synthesis call
+    async function generateAndPlayTTS(text, lang) {
+      if (!text) return;
+      voicePlayer.style.display = 'flex';
+      const waveBars = document.getElementById('waveBars');
+      const voiceStatusText = document.getElementById('voiceStatusText');
+      waveBars.style.opacity = '1';
+      voiceStatusText.textContent = 'Generating full audio with Sarvam Bulbul...';
+
+      try {
+        const resp = await fetch('/api/speak', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: text, language: lang })
+        });
+        const data = await resp.json();
+
+        if (data.audio_base64) {
+          voiceStatusText.textContent = 'Speaking full response (Sarvam Bulbul)';
+          const audioSrc = 'data:audio/wav;base64,' + data.audio_base64;
+          if (state.currentAudio) {
+            state.currentAudio.pause();
+          }
+          state.currentAudio = new Audio(audioSrc);
+          state.currentAudio.play().catch(e => console.log('Autoplay blocked by browser policy; user can tap Replay.'));
+
+          playAudioBtn.onclick = () => {
+            state.currentAudio.currentTime = 0;
+            state.currentAudio.play();
+            waveBars.style.opacity = '1';
+            voiceStatusText.textContent = 'Speaking full response (Sarvam Bulbul)';
+          };
+
+          state.currentAudio.onended = () => {
+            waveBars.style.opacity = '0.3';
+            voiceStatusText.textContent = 'Completed (आवाज़ पूरी हुई) • Tap to replay';
+          };
+        } else {
+          voiceStatusText.textContent = 'Audio could not be generated. Please try again.';
+          waveBars.style.opacity = '0.3';
+        }
+      } catch (e) {
+        console.warn('TTS playback issue:', e);
+        voiceStatusText.textContent = 'Audio connection error';
+        waveBars.style.opacity = '0.3';
+      }
+    }
+
+    // Timeline Rendering
+    function updateTimelineUI(timeline) {
+      morningSlotMeds.innerHTML = '';
+      afternoonSlotMeds.innerHTML = '';
+      nightSlotMeds.innerHTML = '';
+
+      if (!timeline || !timeline.slots) {
+        morningSlotMeds.innerHTML = '<div style="font-size:0.72rem; color:var(--text-muted); font-style:italic;">No morning meds</div>';
+        afternoonSlotMeds.innerHTML = '<div style="font-size:0.72rem; color:var(--text-muted); font-style:italic;">No afternoon meds</div>';
+        nightSlotMeds.innerHTML = '<div style="font-size:0.72rem; color:var(--text-muted); font-style:italic;">No night meds</div>';
+        return;
+      }
+
+      function fillSlot(container, items) {
+        if (!items || items.length === 0) {
+          container.innerHTML = '<div style="font-size:0.72rem; color:var(--text-muted); font-style:italic;">None scheduled</div>';
+          return;
+        }
+        items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'slot-med-badge';
+          card.innerHTML = `
+            <div class="med-head">
+              <span>${item.emoji || '💊'} ${item.name}</span>
+              <span style="color:var(--primary); font-weight:700;">${item.strength || ''}</span>
+            </div>
+            <div class="med-desc">${item.instruction || item.purpose || 'After meals'}</div>
+          `;
+          container.appendChild(card);
+        });
+      }
+
+      fillSlot(morningSlotMeds, timeline.slots.morning.medicines);
+      fillSlot(afternoonSlotMeds, timeline.slots.afternoon.medicines);
+      fillSlot(nightSlotMeds, timeline.slots.night.medicines);
+    }
+
+    // Local heuristic timeline sync for instant UI responsiveness
+    function syncTimelineLocally() {
+      if (state.medicines.length === 0) {
+        updateTimelineUI(null);
+        return;
+      }
+      const morning = [];
+      const afternoon = [];
+      const night = [];
+
+      state.medicines.forEach(m => {
+        const freq = (m.frequency || '').toLowerCase();
+        const entry = { name: m.name, strength: m.strength, emoji: '💊', instruction: m.frequency };
+        if (freq.includes('1-0-1') || freq.includes('twice')) {
+          morning.push(entry);
+          night.push(entry);
+        } else if (freq.includes('1-0-0') || freq.includes('morning') || freq.includes('breakfast')) {
+          morning.push(entry);
+        } else if (freq.includes('0-1-0') || freq.includes('afternoon')) {
+          afternoon.push(entry);
+        } else if (freq.includes('0-0-1') || freq.includes('night') || freq.includes('bedtime') || freq.includes('dinner')) {
+          night.push(entry);
+        } else {
+          morning.push(entry);
+        }
+      });
+
+      updateTimelineUI({
+        slots: {
+          morning: { medicines: morning },
+          afternoon: { medicines: afternoon },
+          night: { medicines: night }
+        }
+      });
+    }
+
+    // Render Agent Reasoning Trace
+    function renderToolTrace(trace) {
+      traceList.innerHTML = '';
+      traceCount.textContent = `${trace.length} steps`;
+
+      if (trace.length === 0) {
+        traceList.innerHTML = '<div style="font-size:0.72rem; color:var(--text-muted);">Direct reasoning synthesis completed.</div>';
+        return;
+      }
+
+      trace.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'trace-item';
+        row.innerHTML = `
+          <span class="trace-badge">Step ${item.step}</span>
+          <span style="font-weight:700; color:var(--primary);">${item.tool}</span>
+          <span style="color:var(--text-muted); flex:1;">${item.summary || JSON.stringify(item.args || {})}</span>
+        `;
+        traceList.appendChild(row);
+      });
+    }
+
+    // Demo Mode Loader
+    demoBtn.addEventListener('click', async () => {
+      demoBtn.disabled = true;
+      demoBtn.innerHTML = '<div class="spinner"></div> Loading Demo...';
+
+      try {
+        const resp = await fetch('/api/demo');
+        const demoData = await resp.json();
+
+        state.medicines = demoData.sample_medicines;
+        renderMedicines();
+        queryText.value = demoData.sample_query;
+        langSelect.value = demoData.sample_language;
+        state.selectedLang = demoData.sample_language;
+
+        // Auto run query to show immediate live result
+        await askDawaiDost();
+      } catch (e) {
+        console.error(e);
+        alert('Could not load demo data.');
+      } finally {
+        demoBtn.disabled = false;
+        demoBtn.innerHTML = '<span>✨</span> Try Demo Mode';
+      }
+    });
+
+    // Initial render
+    renderMedicines();
+  </script>
+</body>
+</html>
